@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 import "./index.css";
 import App from "./App.tsx";
@@ -10,9 +10,10 @@ import SubRoute from "./components/SubRoute/SubRoute.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="vite" element={<VitePage />} />
         <Route path="react">
           <Route index element={<ReactPage />} />
