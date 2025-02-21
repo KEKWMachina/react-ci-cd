@@ -1,38 +1,42 @@
-import './App.css'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import "./App.scss";
+import Artifact from "./components/Artifact";
+import { useArtifactList } from "./hooks/artifact-service.service";
 
-import { useState } from 'react'
-import { useNavigate } from 'react-router';
-
-function App() {
-  const [count, setCount] = useState(0);
-  const navigate = useNavigate();
+export default function App() {
+  const { artifactList, handleArtifactClick, resetList, handleSearch } =
+    useArtifactList();
 
   return (
-    <>
-      <div>
-        <a onClick={() => navigate('/vite')}>
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a onClick={() => navigate('/react')}>
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="artifact-checklist">
+      <div className="artifact-checklist__app-header">
+        <div className="artifact-checklist__app-title">
+          S.T.A.L.K.E.R.2 HoC Artifact Checklist
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <button
+        onClick={() => resetList()}
+        className="artifact-checklist__reset-button"
+      >
+        Reset
+      </button>
+      <div className="artifact-checklist__control-panel">
+        <input
+          onChange={(event) => handleSearch(event.target.value)}
+          className="artifact-checklist__search"
+          type="text"
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <div className="artifact-checklist__list-wrapper">
+        {artifactList.map((artifact) => (
+          <div key={artifact.name} onClick={() => handleArtifactClick(artifact.name)}>
+            <Artifact
+              name={artifact.name}
+              source={artifact.source}
+              found={artifact.found}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
-
-export default App
