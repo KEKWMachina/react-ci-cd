@@ -19,7 +19,7 @@ export default function Artifact({
       )}
       <img
         className="artifact-card__image"
-        src={`../../src/assets/icons/${source}`}
+        src={`src/assets/icons/${source}`}
       />
       <div className="artifact-card__name">{name}</div>
     </div>
