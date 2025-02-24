@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/artifact-tracker" element={<App />} />
         <Route
-          path="/*"
+          path="*"
           element={<Navigate to="/artifact-tracker" replace />}
         />
       </Routes>
