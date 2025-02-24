@@ -9,6 +9,7 @@ export default defineConfig({
       src: "/src",
       components: "/src/components",
       assets: "/src/assets",
+      public: "/public/icons"
     },
   },
   //@ts-expect-error test is working
